@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-api-ec2",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "ubeyidah",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/main.js",
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
