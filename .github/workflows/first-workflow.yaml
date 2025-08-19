@@ -23,7 +23,9 @@ jobs:
         run: cd nextjs-ec2
 
       - name: install deps
+        working-directory: ./nextjs-ec2
         run: npm install
 
       - name: build nextjs
+        working-directory: ./nextj-ec2
         run: npm run build
