@@ -55,4 +55,5 @@ jobs:
             cd ~/app/nextjs-ec2
             npm install
             npm run build
-            npm start
+            pm2 start npm --name "nextjs-app" -- start
+            pm2 save
