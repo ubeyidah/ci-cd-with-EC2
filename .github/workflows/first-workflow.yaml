@@ -1,7 +1,7 @@
 name: CI/CD first workflow
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
