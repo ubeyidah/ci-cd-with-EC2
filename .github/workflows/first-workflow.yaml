@@ -53,4 +53,6 @@ jobs:
             fi
 
             cd ~/app/nextjs-ec2
-            nohup bash -c "npm install && npm run build && pm2 start npm -- start" > deploy.log 2>&1 &
+            npm install
+            npm run build
+            npm start
