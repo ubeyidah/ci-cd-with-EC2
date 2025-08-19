@@ -43,13 +43,19 @@ jobs:
           port: 22
           command_timeout: 15m
           script: |
+            rm -rf ~/app
             mkdir -p ~/app
             cd ~/app
-            rm -rf *
+
             git clone https://github.com/ubeyidah/ci-cd-with-EC2.git .
 
             cd ~/app/nextjs-ec2
+
             npm install
+
             npm run build
-            pm2 start npm --name "nextjs-app" -- start
-            pm2 save
+
+            pkill -f "next start" || true
+
+            # Run in background
+            nohup npm start > app.log 2>&1 &
