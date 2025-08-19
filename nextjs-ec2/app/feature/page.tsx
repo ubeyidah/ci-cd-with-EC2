@@ -1,4 +1,5 @@
 import React from "react";
+const auth = false;
 
 const Feature = () => {
   return (
