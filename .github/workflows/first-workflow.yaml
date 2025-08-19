@@ -45,12 +45,8 @@ jobs:
           script: |
             mkdir -p ~/app
             cd ~/app
-            if [ -d ".git" ]; then
-              git reset --hard
-              git pull
-            else
-              git clone https://github.com/ubeyidah/ci-cd-with-EC2.git .
-            fi
+            rm -rf *
+            git clone https://github.com/ubeyidah/ci-cd-with-EC2.git .
 
             cd ~/app/nextjs-ec2
             npm install
