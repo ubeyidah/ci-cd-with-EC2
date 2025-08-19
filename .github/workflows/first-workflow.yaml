@@ -1,0 +1,29 @@
+name: CI/CD first workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: build nextjs app
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout to main code
+        uses: actions/checkout@v3
+
+      - name: setup nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 24.5.0
+
+      - name: go to nextjs project
+        run: cd nextjs-ec2
+
+      - name: install deps
+        run: npm install
+
+      - name: build nextjs
+        run: npm run build
