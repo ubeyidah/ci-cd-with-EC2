@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           port: 22
-          command_timeout: 900
+          command_timeout: 15m
           script: |
             mkdir -p ~/app
             cd ~/app
