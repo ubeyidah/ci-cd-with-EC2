@@ -1,9 +1,10 @@
 name: CI/CD first workflow
 
 on:
+  push:
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
@@ -19,9 +20,6 @@ jobs:
         with:
           node-version: 24.5.0
 
-      - name: go to nextjs project
-        run: cd nextjs-ec2
-
       - name: install deps
         working-directory: ./nextjs-ec2
         run: npm install
@@ -29,3 +27,31 @@ jobs:
       - name: build nextjs
         working-directory: ./nextjs-ec2
         run: npm run build
+
+  deploy:
+    name: deploy nextjs app
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          port: 22
+          scripts: |
+            mkdir -p ~/app
+            cd ~/app
+            if [ -d ".git" ]; then
+              git reset --hard
+              git pull
+            else
+              git clone https://github.com/ubeyidah/ci-cd-with-EC2.git .
+            fi
+
+            cd ~/app/nextjs-ec2
+            npm install
+            npm run build
+            pm2 start npm -- start
